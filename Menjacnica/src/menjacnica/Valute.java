@@ -1,5 +1,7 @@
 package menjacnica;
 
+import java.util.Arrays;
+
 public class Valute {
 
 	private String nazivValute;
@@ -28,6 +30,46 @@ public class Valute {
 
 	public void setKursevi(Kurs[] kursevi) {
 		this.kursevi = kursevi;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(kursevi);
+		result = prime * result + ((nazivValute == null) ? 0 : nazivValute.hashCode());
+		result = prime * result + ((skracenicaValute == null) ? 0 : skracenicaValute.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Valute other = (Valute) obj;
+		if (!Arrays.equals(kursevi, other.kursevi))
+			return false;
+		if (nazivValute == null) {
+			if (other.nazivValute != null)
+				return false;
+		} else if (!nazivValute.equals(other.nazivValute))
+			return false;
+		if (skracenicaValute == null) {
+			if (other.skracenicaValute != null)
+				return false;
+		} else if (!skracenicaValute.equals(other.skracenicaValute))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Valute [nazivValute=" + nazivValute + ", skracenicaValute=" + skracenicaValute + ", kursevi="
+				+ Arrays.toString(kursevi) + "]";
 	}
 
 }

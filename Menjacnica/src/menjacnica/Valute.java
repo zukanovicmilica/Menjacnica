@@ -1,18 +1,21 @@
 package menjacnica;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Valute {
 
 	private String nazivValute;
 	private String skracenicaValute;
-	private Kurs[] kursevi;
+	LinkedList<Kurs> kursevi = new LinkedList<Kurs>();
 
 	public String getNazivValute() {
 		return nazivValute;
 	}
 
 	public void setNazivValute(String nazivValute) {
+		if (nazivValute == null)
+			throw new RuntimeException("Morate da upisite naziv valute.");
 		this.nazivValute = nazivValute;
 	}
 
@@ -21,14 +24,16 @@ public class Valute {
 	}
 
 	public void setSkracenicaValute(String skracenicaValute) {
+		if (skracenicaValute == null)
+			throw new RuntimeException("Morate da upisite skracenicu valute.");
 		this.skracenicaValute = skracenicaValute;
 	}
 
-	public Kurs[] getKursevi() {
+	public LinkedList<Kurs> getKursevi() {
 		return kursevi;
 	}
 
-	public void setKursevi(Kurs[] kursevi) {
+	public void setKursevi(LinkedList<Kurs> kursevi) {
 		this.kursevi = kursevi;
 	}
 
@@ -36,7 +41,7 @@ public class Valute {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Arrays.hashCode(kursevi);
+		result = prime * result + ((kursevi == null) ? 0 : kursevi.hashCode());
 		result = prime * result + ((nazivValute == null) ? 0 : nazivValute.hashCode());
 		result = prime * result + ((skracenicaValute == null) ? 0 : skracenicaValute.hashCode());
 		return result;
@@ -51,7 +56,10 @@ public class Valute {
 		if (getClass() != obj.getClass())
 			return false;
 		Valute other = (Valute) obj;
-		if (!Arrays.equals(kursevi, other.kursevi))
+		if (kursevi == null) {
+			if (other.kursevi != null)
+				return false;
+		} else if (!kursevi.equals(other.kursevi))
 			return false;
 		if (nazivValute == null) {
 			if (other.nazivValute != null)
@@ -68,8 +76,8 @@ public class Valute {
 
 	@Override
 	public String toString() {
-		return "Valute [nazivValute=" + nazivValute + ", skracenicaValute=" + skracenicaValute + ", kursevi="
-				+ Arrays.toString(kursevi) + "]";
+		return "Valute [nazivValute=" + nazivValute + ", skracenicaValute=" + skracenicaValute + ", kursevi=" + kursevi
+				+ "]";
 	}
 
 }

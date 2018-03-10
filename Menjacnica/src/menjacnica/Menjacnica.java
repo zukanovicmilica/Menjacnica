@@ -18,6 +18,7 @@ public class Menjacnica implements InterfejsMenjacnice {
 			if (kursnaLista.get(i).getNazivValute().contains(nazivValute)) {
 				if (kursnaLista.get(i).kursevi.contains(noviKurs))
 					throw new RuntimeException("Uneti kurs vec postoji.");
+				kursnaLista.get(i).kursevi.add(noviKurs);
 			}
 		}
 	}
